@@ -1,5 +1,8 @@
 package com.sevebadajoz.ErgScoreAnalytics.model;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 public class Split {
     private String textForm;
     private double seconds;
@@ -19,9 +22,25 @@ public class Split {
         return textToSeconds(textForm);
     }
 
-
     private void createSeconds(){
         seconds = textToSeconds();
+    }
+
+    private String secondsToString(double seconds) {
+        NumberFormat df = new DecimalFormat("0#");
+        int min = (int)seconds / 60;
+        double sec = seconds % 60;
+        return df.format(min) + ":" + sec;
+
+    }
+
+
+    private Split avgSplit(Split... splits) {
+        int totalSeconds = 0;
+        for (Split split : splits) {
+            totalSeconds += split.seconds;
+        }
+        return new Split(secondsToString(totalSeconds));
     }
 
     public String toString() {

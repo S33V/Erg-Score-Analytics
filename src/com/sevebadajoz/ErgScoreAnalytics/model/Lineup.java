@@ -10,6 +10,9 @@ public class Lineup {
     private Rower two;
     private Rower bow;
 
+    private Split avgSplit;
+    private Split avgAdjSplit;
+
     public Lineup(Rower stroke, Rower seven, Rower six, Rower five, Rower four, Rower three, Rower two, Rower bow) {
         this.stroke = stroke;
         this.seven = seven;
