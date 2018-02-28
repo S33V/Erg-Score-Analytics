@@ -3,10 +3,12 @@ package com.sevebadajoz.ErgScoreAnalytics.model;
 public class Rower {
     private String name;
     private Split split;
+    private Split weightAdjSplit;
 
-    public Rower(String name, String split) {
+    public Rower(String name, String split, String weightAdjSplit) {
         this.name = name;
-        this.split = new Split(split);
+        this.split = new Split(split)
+        this.weightAdjSplit = new Split(weightAdjSplit);
     }
 
     public String getName() {
@@ -23,6 +25,14 @@ public class Rower {
 
     public void setSplit(Split split) {
         this.split = split;
+    }
+
+    public Split getWeightAdjSplit() {
+        return weightAdjSplit;
+    }
+
+    public void setWeightAdjSplit(Split weightAdjSplit) {
+        this.weightAdjSplit = weightAdjSplit;
     }
 
     @Override
