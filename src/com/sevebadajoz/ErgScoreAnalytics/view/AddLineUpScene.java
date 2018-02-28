@@ -1,5 +1,6 @@
 package com.sevebadajoz.ErgScoreAnalytics.view;
 
+import com.sevebadajoz.ErgScoreAnalytics.controller.Controller;
 import com.sevebadajoz.stroketiming.controller.Controller;
 import com.sevebadajoz.stroketiming.model.Boat;
 import com.sevebadajoz.stroketiming.model.Coxswain;
