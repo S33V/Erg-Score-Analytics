@@ -26,7 +26,7 @@ public class Split {
         seconds = textToSeconds();
     }
 
-    private String secondsToString(double seconds) {
+    public static String secondsToString(double seconds) {
         NumberFormat df = new DecimalFormat("0#");
         int min = (int)seconds / 60;
         double sec = seconds % 60;
