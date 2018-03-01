@@ -1,5 +1,9 @@
 package com.sevebadajoz.ErgScoreAnalytics.controller;
 
+import javafx.collections.FXCollections;
+
+import java.sql.SQLException;
+
 public class Controller {
     public static final String DB_NAME = "erg_score_analytics.db";
 
@@ -12,5 +16,14 @@ public class Controller {
     public static final String[] ROWERS_FIELD_NAMES = {"id", "name"};
     public static final String[] ROWERS_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT"};
 
+    private static Controller theOne;
 
+    private Controller() {}
+
+    public static Controller getInstance() {
+        if (theOne == null) {
+            theOne = new Controller();
+        }
+        return theOne;
+    }
 }
