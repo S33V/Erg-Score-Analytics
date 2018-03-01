@@ -1,7 +1,10 @@
 package com.sevebadajoz.ErgScoreAnalytics.view;
 
-import com.sevebadajoz.stroketiming.controller.Controller;
-import com.sevebadajoz.stroketiming.model.Lineup;
+import com.sevebadajoz.ErgScoreAnalytics.controller.Controller;
+import com.sevebadajoz.ErgScoreAnalytics.model.Lineup;
+import com.sevebadajoz.ErgScoreAnalytics.model.ViewSwitch;
+import com.sevebadajoz.ErgScoreAnalytics.controller.Controller;
+import com.sevebadajoz.ErgScoreAnalytics.model.Lineup;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -28,17 +31,6 @@ public class BoatListScene implements Initializable {
 	@FXML
 	private Button mViewCoxswains;
 
-	@FXML
-	public Object viewCoxswains() {
-		ViewSwitch.loadScene("Coxswains", ViewSwitch.VIEW_COXSWAINS);
-		return this;
-	}
-
-	@FXML
-	public Object viewRowers() {
-		ViewSwitch.loadScene("Rowers", ViewSwitch.VIEW_ROWERS);
-		return this;
-	}
 
 	@FXML
 	public Object exitCheck() {
@@ -57,7 +49,7 @@ public class BoatListScene implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		mBoatList.setItems(mController.getLineups());
+//		mBoatList.setItems(mController.getLineups());
 	}
 
 	@FXML
@@ -69,8 +61,8 @@ public class BoatListScene implements Initializable {
     @FXML
     public Object loadInfo() {
         Lineup lineup = mBoatList.getSelectionModel().getSelectedItem();
-		mController.setActiveLineup(lineup);
-		ViewSwitch.loadScene("Practices for " + lineup, ViewSwitch.PRACTICE_LIST_SCENE);
+//		mController.setActiveLineup(lineup);
+//		ViewSwitch.loadScene("Practices for " + lineup, ViewSwitch.PRACTICE_LIST_SCENE);
         return this;
     }
 }
