@@ -1,5 +1,7 @@
 package com.sevebadajoz.ErgScoreAnalytics.controller;
 
+import com.sevebadajoz.ErgScoreAnalytics.model.DBModel;
+import com.sevebadajoz.ErgScoreAnalytics.model.SheetHelper;
 import javafx.collections.FXCollections;
 
 import java.sql.SQLException;
@@ -15,6 +17,9 @@ public class Controller {
     public static final String ROWERS_TABLE_NAME = "rowers";
     public static final String[] ROWERS_FIELD_NAMES = {"id", "name"};
     public static final String[] ROWERS_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT"};
+
+    SheetHelper sheetHelper;
+    DBModel dbModel;
 
     private static Controller theOne;
 
