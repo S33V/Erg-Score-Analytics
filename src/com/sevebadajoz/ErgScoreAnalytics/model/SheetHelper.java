@@ -24,6 +24,12 @@ public class SheetHelper {
         sheet = workbook.getSheetAt(0);
     }
 
+    public SheetHelper(FileInputStream file, int sheetNum) throws IOException {
+        this(file);
+        sheet = workbook.getSheetAt(sheetNum);
+    }
+
+
     public String[] getColHeaders() {
         Row headerRow = sheet.getRow(0);
         Iterator<Cell> cell = headerRow.cellIterator();
