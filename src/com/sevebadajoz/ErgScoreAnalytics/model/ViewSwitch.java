@@ -8,7 +8,6 @@ import java.io.IOException;
 
 public class ViewSwitch {
     public static final String BOAT_LIST_SCENE = "com/sevebadajoz/ErgScoreAnalytics/view/boatList.fxml";
-    public static final String ADD_BOAT_SCENE = "com/sevebadajoz/ErgScoreAnalytics/view/addBoat.fxml";
     public static final String ADD_LINEUP_SCENE = "com/sevebadajoz/ErgScoreAnalytics/view/addLineup.fxml";
     public static final String MAIN_SCENE = "com/sevebadajoz/ErgScoreAnalytics/view/main.fxml";
     public static Stage activeStage;
