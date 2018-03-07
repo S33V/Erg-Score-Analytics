@@ -1,5 +1,6 @@
 package com.sevebadajoz.ErgScoreAnalytics.view;
 
+import com.sevebadajoz.ErgScoreAnalytics.controller.Controller;
 import com.sevebadajoz.ErgScoreAnalytics.model.ViewSwitch;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -14,6 +15,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class MainScene extends Application {
 
@@ -22,6 +25,7 @@ public class MainScene extends Application {
     @FXML
     private TextField filePath;
     @FXML
+    private Button submitButton;
 
     private File selectedFile;
 
@@ -34,6 +38,16 @@ public class MainScene extends Application {
             fileChooser.setTitle("Open Spreadsheet");
             selectedFile = fileChooser.showOpenDialog(primaryStage);
             filePath.setText(selectedFile.getPath());
+        });
+
+        submitButton.setOnAction((ActionEvent actionEvent) -> {
+            try {
+                if(Controller.openSheet(new FileInputStream(selectedFile)) == true);
+                //TODO: Add code to fix assumption that name col is titled "NAME"
+                ViewSwitch.loadScene("Select Lineup", ViewSwitch.BOAT_LIST_SCENE);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         });
     }
 
