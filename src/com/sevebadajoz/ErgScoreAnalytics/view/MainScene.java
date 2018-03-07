@@ -29,17 +29,12 @@ public class MainScene extends Application {
     public void start(Stage primaryStage) throws Exception{
         ViewSwitch.setStage(primaryStage);
 
-        browseButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                FileChooser fileChooser = new FileChooser();
-                fileChooser.setTitle("Open Spreadsheet");
-                selectedFile = fileChooser.showOpenDialog(primaryStage);
-                filePath.setText(selectedFile.getPath());
-            }
+        browseButton.setOnAction((ActionEvent actionEvent) -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open Spreadsheet");
+            selectedFile = fileChooser.showOpenDialog(primaryStage);
+            filePath.setText(selectedFile.getPath());
         });
-
-
     }
 
 
