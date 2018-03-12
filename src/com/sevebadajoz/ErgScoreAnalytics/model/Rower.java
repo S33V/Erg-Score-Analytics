@@ -1,14 +1,17 @@
 package com.sevebadajoz.ErgScoreAnalytics.model;
 
 public class Rower {
+    private int id;
     private String name;
     private Split split;
     private Split weightAdjSplit;
+    private double weight;
 
-    public Rower(String name, String split, String weightAdjSplit) {
+    public Rower(String name, int id, String split, double weight) {
         this.name = name;
         this.split = new Split(split);
-        this.weightAdjSplit = new Split(weightAdjSplit);
+        this.weight = weight;
+        weightAdjSplit = this.split.weightAdj(weight);
     }
 
     public String getName() {

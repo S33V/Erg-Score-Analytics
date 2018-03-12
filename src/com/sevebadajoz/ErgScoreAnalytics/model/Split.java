@@ -46,4 +46,8 @@ public class Split {
     public String toString() {
         return textForm;
     }
+
+    public Split weightAdj(double weight) {
+        return new Split(secondsToString(Math.pow(weight / 270, .222) * seconds));
+    }
 }
