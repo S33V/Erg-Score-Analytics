@@ -69,11 +69,6 @@ public class AddLineUpScene implements Initializable {
         return this;
     }
 
-    @FXML
-    Object addNewBoat() {
-        ViewSwitch.loadScene("Add New Boat", ViewSwitch.ADD_BOAT_SCENE);
-        return this;
-    }
 
 
     @FXML

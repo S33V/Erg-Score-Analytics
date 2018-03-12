@@ -14,7 +14,7 @@ public class Controller {
 
     public static DBModel lineupsTable;
     public static final String LINEUPS_TABLE_NAME = "lineups";
-    public static final String[] LINEUPS_FIELD_NAMES = {"id", "stroke", "7", "6", "5", "4", "3", "2", "bow"};
+    public static final String[] LINEUPS_FIELD_NAMES = {"id", "stroke", "seven", "six", "five", "four", "three", "two", "bow"};
     public static final String[] LINEUPS_FIELD_TYPES = {"INTEGER PRIMARY KEY", "INTEGER", "INTEGER", "INTEGER",
             "INTEGER", "INTEGER", "INTEGER", "INTEGER", "INTEGER"};
 

@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevebadajoz.stroketiming.view.BoatListScene">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevebadajoz.ErgScoreAnalytics.view.BoatListScene">
   <bottom>
     <HBox alignment="CENTER" fillHeight="fals e" prefHeight="28.0" prefWidth="600.0" spacing="300.0" visible="true">
       <children>
-            <Button fx:id="mDeleteButton" alignment="CENTER" mnemonicParsing="false" onAction="#viewCoxswains" text="Delete Lineup" />
-            <Button fx:id="mEditButton" mnemonicParsing="false" onAction="#viewCoxswains" text="Edit Lineup">
+            <Button fx:id="mDeleteButton" alignment="CENTER" mnemonicParsing="false"  text="Delete Lineup" />
+            <Button fx:id="mEditButton" mnemonicParsing="false"  text="Edit Lineup">
                <HBox.margin>
                   <Insets left="3.0" right="3.0" />
                </HBox.margin></Button>

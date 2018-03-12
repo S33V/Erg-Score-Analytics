@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<VBox alignment="CENTER" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevebadajoz.ErgScoreAnalytics.view.ImportSheetScene">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Upload a Spreadsheet To Be Analyzed">
          <VBox.margin>
@@ -18,7 +18,7 @@
       <HBox alignment="CENTER">
          <children>
             <TextField fx:id="filePath" alignment="CENTER" promptText="No File Chosen" />
-            <Button fx:id="browseButton" mnemonicParsing="false" text="Browse" />
+            <Button fx:id="browseButton" mnemonicParsing="false" text="Browse"/>
          </children>
          <VBox.margin>
             <Insets bottom="64.0" top="64.0" />

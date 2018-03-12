@@ -41,7 +41,7 @@ public class DBModel
             StringBuilder createSQL = new StringBuilder("CREATE TABLE IF NOT EXISTS ");
             createSQL.append(mTableName).append("(");
             for (int i = 0; i < mFieldNames.length; i++)
-                createSQL.append(mFieldNames[i]).append(" ").append(mFieldTypes[i]).append((i < mFieldNames.length -1) ? "," : ")");
+                createSQL.append(mFieldNames[i]).append(" ").append(mFieldTypes[i]).append((i < mFieldNames.length -1) ? ", " : ")");
             stmt.executeUpdate(createSQL.toString());
         }
     }
