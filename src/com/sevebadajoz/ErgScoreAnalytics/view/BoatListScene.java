@@ -19,17 +19,15 @@ public class BoatListScene implements Initializable {
 
 	private static final Controller mController = Controller.getInstance();
 	@FXML
-	private Button mAddButton;
+	private Button exitButton;
 	@FXML
-	private Button mExitButton;
-	@FXML
-	private ListView<Lineup> mBoatList;
+	private ListView<Lineup> boatList;
     @FXML
-    private Button mMoreInfo;
+    private Button deleteButton;
 	@FXML
-	private Button mViewRowers;
+	private Button editButton;
 	@FXML
-	private Button mViewCoxswains;
+	private Button addButton;
 
 
 	@FXML
@@ -54,13 +52,13 @@ public class BoatListScene implements Initializable {
 
 	@FXML
 	Object enableButton() {
-		mMoreInfo.setDisable(false);
+		editButton.setDisable(false);
 		return this;
 	}
 
     @FXML
     public Object loadInfo() {
-        Lineup lineup = mBoatList.getSelectionModel().getSelectedItem();
+        Lineup lineup = boatList.getSelectionModel().getSelectedItem();
 //		mController.setActiveLineup(lineup);
 //		ViewSwitch.loadScene("Practices for " + lineup, ViewSwitch.PRACTICE_LIST_SCENE);
         return this;
