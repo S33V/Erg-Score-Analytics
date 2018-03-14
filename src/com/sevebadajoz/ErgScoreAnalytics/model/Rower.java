@@ -7,7 +7,7 @@ public class Rower {
     private Split weightAdjSplit;
     private double weight;
 
-    public Rower(String name, int id, String split, double weight) {
+    public Rower(int id, String name, String split, double weight) {
         this.name = name;
         this.split = new Split(split);
         this.weight = weight;
