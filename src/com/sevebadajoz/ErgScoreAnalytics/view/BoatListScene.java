@@ -47,7 +47,7 @@ public class BoatListScene implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-//		mBoatList.setItems(mController.getLineups());
+		boatList.setItems(mController.getLineups());
 	}
 
 	@FXML
