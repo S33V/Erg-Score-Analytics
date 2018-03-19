@@ -29,6 +29,8 @@ public class ImportSheetScene implements Initializable{
 
     private File selectedFile;
 
+    private Controller controller = Controller.getInstance();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         browseButton.setOnAction(actionEvent ->  {
@@ -40,8 +42,7 @@ public class ImportSheetScene implements Initializable{
 
         submitButton.setOnAction(event -> {
             try {
-                if(Controller.openSheet(new FileInputStream(selectedFile)))
-                //TODO: Add code to fix assumption that name col is titled "NAME"
+                if(controller.openSheet(new FileInputStream(selectedFile)))
                 ViewSwitch.loadScene("Select Lineup", ViewSwitch.BOAT_LIST_SCENE);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
