@@ -8,6 +8,7 @@ public class Rower {
     private double weight;
 
     public Rower(int id, String name, String split, double weight) {
+        this.id = id;
         this.name = name;
         this.split = new Split(split);
         this.weight = weight;
@@ -51,5 +52,14 @@ public class Rower {
     @Override
     public int hashCode() {
         return name != null ? name.hashCode() : 0;
+    }
+
+    public int getID() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
