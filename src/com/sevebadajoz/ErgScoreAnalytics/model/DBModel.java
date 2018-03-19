@@ -176,7 +176,10 @@ public class DBModel
             if (mFieldNames[i].equals(field))
             {
                 if (mFieldTypes[i].toUpperCase().startsWith("TEXT"))
-                    return "'" + value + "'";
+                    if(value.contains("'"))
+                        return "'" + value.replace("'","''") + "'";
+                    else
+                        return "'" + value + "'";
                 break;
             }
         }
