@@ -5,6 +5,7 @@ import com.sevebadajoz.ErgScoreAnalytics.controller.Controller;
 
 import com.sevebadajoz.ErgScoreAnalytics.model.Rower;
 import com.sevebadajoz.ErgScoreAnalytics.model.ViewSwitch;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
 import java.net.URL;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
 public class AddLineUpScene implements Initializable {
@@ -46,8 +48,6 @@ public class AddLineUpScene implements Initializable {
 
     @FXML
     Object addLineup() {
-//        Boat boat = mBoat.getSelectionModel().getSelectedItem();
-//        Coxswain coxswain = mCoxswain.getSelectionModel().getSelectedItem();
         Rower stroke = mStroke.getSelectionModel().getSelectedItem();
         Rower seven = mSevenSeat.getSelectionModel().getSelectedItem();
         Rower six = mSixSeat.getSelectionModel().getSelectedItem();
@@ -57,7 +57,7 @@ public class AddLineUpScene implements Initializable {
         Rower two = mTwoSeat.getSelectionModel().getSelectedItem();
         Rower bow = mBowSeat.getSelectionModel().getSelectedItem();
         Rower[] rowers = {stroke, seven, six, five, four, three, two, bow};
-//        mController.addNewLineup(rowers, coxswain, boat);
+        mController.addNewLineup(rowers);
 
         ViewSwitch.loadScene("Stroke Timing", ViewSwitch.BOAT_LIST_SCENE);
         return this;
@@ -73,27 +73,27 @@ public class AddLineUpScene implements Initializable {
 
     @FXML
     Object checkCompletion() {
-//        if (mBoat.getSelectionModel().isEmpty() || mCoxswain.getSelectionModel().isEmpty() || mStroke.getSelectionModel().isEmpty() || mSevenSeat.getSelectionModel().isEmpty() ||
-//                mSixSeat.getSelectionModel().isEmpty() || mFiveSeat.getSelectionModel().isEmpty() || mFourSeat.getSelectionModel().isEmpty() || mThreeSeat.getSelectionModel().isEmpty()
-//                || mTwoSeat.getSelectionModel().isEmpty() || mBowSeat.getSelectionModel().isEmpty()) {
-//            mAddLineup.setDisable(true);
-//        } else mAddLineup.setDisable(false);
+        if (mStroke.getSelectionModel().isEmpty() || mSevenSeat.getSelectionModel().isEmpty() ||
+                mSixSeat.getSelectionModel().isEmpty() || mFiveSeat.getSelectionModel().isEmpty() ||
+                mFourSeat.getSelectionModel().isEmpty() || mThreeSeat.getSelectionModel().isEmpty()
+                || mTwoSeat.getSelectionModel().isEmpty() || mBowSeat.getSelectionModel().isEmpty()) {
+            mAddLineup.setDisable(true);
+        } else mAddLineup.setDisable(false);
         return this;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        mBoat.getItems().setAll(mController.getBoats());
-//        mCoxswain.getItems().setAll(mController.getCoxswains());
-//        ObservableList<Rower> allRowers = mController.getRowers();
-//        mStroke.getItems().setAll(allRowers);
-//        mSevenSeat.getItems().setAll(allRowers);
-//        mSixSeat.getItems().setAll(allRowers);
-//        mFiveSeat.getItems().setAll(allRowers);
-//        mFourSeat.getItems().setAll(allRowers);
-//        mThreeSeat.getItems().setAll(allRowers);
-//        mTwoSeat.getItems().setAll(allRowers);
-//        mBowSeat.getItems().setAll(allRowers);
+        ObservableList<Rower> allRowers = FXCollections.observableArrayList(mController.getRowers());
+        allRowers.sort(Comparator.comparing(Rower::getName));
+        mStroke.getItems().setAll(allRowers);
+        mSevenSeat.getItems().setAll(allRowers);
+        mSixSeat.getItems().setAll(allRowers);
+        mFiveSeat.getItems().setAll(allRowers);
+        mFourSeat.getItems().setAll(allRowers);
+        mThreeSeat.getItems().setAll(allRowers);
+        mTwoSeat.getItems().setAll(allRowers);
+        mBowSeat.getItems().setAll(allRowers);
 
     }
 }
