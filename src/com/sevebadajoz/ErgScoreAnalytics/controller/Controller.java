@@ -37,7 +37,8 @@ public class Controller {
 
     private static Controller theOne;
 
-    private Controller() {}
+    private Controller() {
+    }
 
     public static Controller getInstance() {
         if (theOne == null) {
@@ -88,19 +89,19 @@ public class Controller {
         double weight;
         String[] colHeaders = sheetHelper.getColHeaders();
         for (int i = 0; i < colHeaders.length; i++) {
-            switch(colHeaders[i].trim().toUpperCase()){
-                case("NAME"):
+            switch (colHeaders[i].trim().toUpperCase()) {
+                case ("NAME"):
                     nameCol = i;
                     break;
-                case("WEIGHT"):
+                case ("WEIGHT"):
                     weightCol = i;
                     break;
-                case("AVG. SPLIT"):
+                case ("AVG. SPLIT"):
                     splitCol = i;
                     break;
             }
         }
-        if(nameCol == 0 || weightCol == 0 || splitCol == 0) return false;
+        if (nameCol == 0 || weightCol == 0 || splitCol == 0) return false;
 
         //TODO:BUG IN getRowValues
 //        String[][] simplifiedSheet = {  sheetHelper.getRowValues(nameCol),
@@ -128,33 +129,32 @@ public class Controller {
 
         String[][] rows = new String[sheetHelper.getSheet().getPhysicalNumberOfRows()][colHeaders.length];
 
-        for(int i = 0; i < rows.length; i++)
+        for (int i = 0; i < rows.length; i++)
             rows[i] = sheetHelper.getColValues(i);
 
-        for(int i = 0; i < rows.length; i++) {
+        for (int i = 0; i < rows.length; i++) {
 //            Check to see if the first cell in the row is a number
 //            This should be true if the row is a rower, because first cell should be rank
-            if(rows[i][0] == null) rows[i][0] = "";
+            if (rows[i][0] == null) rows[i][0] = "";
             Scanner digitChecker = new Scanner(rows[i][0].trim());
-            if(!digitChecker.hasNextInt())
+            if (!digitChecker.hasNextInt())
                 continue;
             digitChecker.nextInt();
             if (!digitChecker.hasNext()) {
                 name = rows[i][nameCol];
-                split = rows[i][splitCol ];
+                split = rows[i][splitCol];
                 weight = Double.valueOf(rows[i][weightCol]);
                 if (!addNewRower(name, split, weight)) {
                     System.out.println("NOT ADDED: " + name);
                     return false;
-                }
-                else
+                } else
                     System.out.println("ADDED: " + name);
             }
         }
         return true;
     }
 
-    public  boolean addNewRower(String name, String split, double weight) {
+    public boolean addNewRower(String name, String split, double weight) {
         String[] values = new String[ROWERS_FIELD_NAMES.length - 1];
         values[0] = name;
         values[1] = split;
@@ -171,22 +171,21 @@ public class Controller {
 
 
     public ObservableList<Rower> getRowers() {
-        try{
+        try {
             ArrayList<ArrayList<String>> rs = theOne.rowersTable.getAllRecords();
 
-            for (ArrayList<String> values : rs)
-            {
+            for (ArrayList<String> values : rs) {
                 boolean notFound = true;
                 int ID = Integer.parseInt(values.get(0));
                 for (Rower rower : rowers) {
-                    if(rower.getID() == ID) notFound = false;
+                    if (rower.getID() == ID) notFound = false;
                 }
                 String name = values.get(1);
                 String split = values.get(2);
                 double weight = Double.parseDouble(values.get(3));
 
 
-                if(notFound)theOne.rowers.add(new Rower(ID, name, split, weight));
+                if (notFound) theOne.rowers.add(new Rower(ID, name, split, weight));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -200,7 +199,8 @@ public class Controller {
             IDs[i] = Integer.toString(rowers[i].getID());
         }
         try {
-            lineupsTable.createRecord(Arrays.copyOfRange(LINEUPS_FIELD_NAMES, 1, ROWERS_FIELD_NAMES.length), IDs);
+            lineupsTable.createRecord(Arrays.copyOfRange(LINEUPS_FIELD_NAMES, 1, LINEUPS_FIELD_NAMES.length), IDs);
+            System.out.println("ADDED LINEUP: " + rowers);
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -209,6 +209,32 @@ public class Controller {
     }
 
     public ObservableList<Lineup> getLineups() {
+        try {
+            ArrayList<ArrayList<String>> rs = theOne.lineupsTable.getAllRecords();
+            for (ArrayList<String> values : rs) {
+                boolean notFound = true;
+                int ID = Integer.parseInt(values.get(0));
+                for (Lineup lineup : lineups) {
+                    if (lineup.getID() == ID) notFound = false;
+                }
+                if (notFound) {
+                    Rower[] addRowers = new Rower[8];
+                    int count = 0;
+                    for (String value : values) {
+                        for (Rower rower : theOne.rowers) {
+                            if (value == Integer.toString(rower.getID()))
+                                addRowers[count++] = rower;
+                        }
+                    }
+                    theOne.lineups.add(new Lineup(ID, addRowers[0], addRowers[1], addRowers[2], addRowers[3]
+                            , addRowers[4], addRowers[5], addRowers[6], addRowers[7]));
 
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return theOne.lineups;
     }
 }
