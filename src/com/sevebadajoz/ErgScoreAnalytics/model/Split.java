@@ -29,7 +29,7 @@ public class Split {
     public static String secondsToString(double seconds) {
         int min = (int)seconds / 60;
         double sec = seconds % 60;
-        return min + ":" + sec;
+        return String.format("%02d", min) + ":" + sec;
 
     }
 
