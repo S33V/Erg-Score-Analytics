@@ -54,7 +54,7 @@ public class BoatListScene implements Initializable {
 			Lineup selectedLineup = boatList.getSelectionModel().getSelectedItem();
 //			If the clicked lineup is not null set the active lineup to the selected lineup
             if (selectedLineup != null) {
-                Controller.getInstance().setActiveLineup(selectedLineup);
+                mController.setActiveLineup(selectedLineup);
 //                If multi-click launch the selected lineup's erg stats
 			    if (mouseEvent.getClickCount() > 1)
                     ViewSwitch.loadScene("Erg Stats", ViewSwitch.ERG_STATS_SCENE);
