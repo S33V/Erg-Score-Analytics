@@ -48,8 +48,8 @@ public class Controller {
             theOne.lineups = FXCollections.observableArrayList();
 
             try {
-                theOne.lineupsTable = new DBModel(DB_NAME, LINEUPS_TABLE_NAME, LINEUPS_FIELD_NAMES, LINEUPS_FIELD_TYPES);
-                theOne.rowersTable = new DBModel(DB_NAME, ROWERS_TABLE_NAME, ROWERS_FIELD_NAMES, ROWERS_FIELD_TYPES);
+                lineupsTable = new DBModel(DB_NAME, LINEUPS_TABLE_NAME, LINEUPS_FIELD_NAMES, LINEUPS_FIELD_TYPES);
+                rowersTable = new DBModel(DB_NAME, ROWERS_TABLE_NAME, ROWERS_FIELD_NAMES, ROWERS_FIELD_TYPES);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -152,7 +152,7 @@ public class Controller {
 
     public ObservableList<Rower> getRowers() {
         try {
-            ArrayList<ArrayList<String>> rs = theOne.rowersTable.getAllRecords();
+            ArrayList<ArrayList<String>> rs = rowersTable.getAllRecords();
 
             for (ArrayList<String> values : rs) {
                 boolean notFound = true;
@@ -190,31 +190,36 @@ public class Controller {
 
     public ObservableList<Lineup> getLineups() {
         try {
-            ArrayList<ArrayList<String>> rs = theOne.lineupsTable.getAllRecords();
+            ArrayList<ArrayList<String>> rs = lineupsTable.getAllRecords();
+//            Iterate through the rows in lineupsTable
             for (ArrayList<String> values : rs) {
-                boolean notFound = true;
-                int ID = Integer.parseInt(values.get(0));
-                for (Lineup lineup : lineups) {
-                    if (lineup.getID() == ID) notFound = false;
-                }
-                if (notFound) {
-                    Rower[] addRowers = new Rower[8];
-                    int count = 0;
-                    for (Object value : values.stream().skip(1).toArray()) {
-                        String casted = (String)value;
-                        for (Rower rower : theOne.rowers) {
+                Rower[] addRowers = new Rower[8];
+                int count = 0;
+//                Iterate through the table row, skipping the first value(lineup ID)
+                for (Object value : values.stream().skip(1).toArray()) {
+                    String casted = (String) value;
+//                    Search through rowers for value(rower ID), if found Rower to array
+                    for (Rower rower : theOne.rowers) {
 //                            System.out.println("Value ID: " + casted + ", Rower ID: " + Integer.toString(rower.getID()));
-                            if (casted.equals(Integer.toString(rower.getID()))) {
+                        if (casted.equals(Integer.toString(rower.getID()))) {
 //                                System.out.println("MATCH, count: " + count);
-                                addRowers[count++] = rower;
-                            }
+                            addRowers[count++] = rower;
                         }
                     }
-                    if(addRowers[0] != null)
-                        theOne.lineups.add(new Lineup(ID, addRowers[0], addRowers[1], addRowers[2], addRowers[3]
-                            , addRowers[4], addRowers[5], addRowers[6], addRowers[7]));
-
                 }
+//                If the array is not null create a new Lineup from array
+                if (addRowers[0] != null) {
+                    int lineupID = Integer.parseInt(values.get(0));
+                    Lineup newLineup = new Lineup(lineupID, addRowers[0], addRowers[1],
+                            addRowers[2], addRowers[3], addRowers[4], addRowers[5], addRowers[6], addRowers[7]);
+//                    If the new Lineup doesn't already exist in the ObservableList, add it
+                    if (!theOne.lineups.contains(newLineup))
+                        theOne.lineups.add(newLineup);
+                    else {
+                        System.out.println(newLineup + " already exists");
+                    }
+                }
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
