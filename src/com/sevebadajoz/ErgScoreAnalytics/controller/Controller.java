@@ -85,7 +85,7 @@ public class Controller {
             e.printStackTrace();
         }
         int nameCol = 0, weightCol = 0, splitCol = 0;
-        String name = "", split = "";
+        String name, split;
         double weight;
         String[] colHeaders = sheetHelper.getColHeaders();
         for (int i = 0; i < colHeaders.length; i++) {
@@ -101,31 +101,9 @@ public class Controller {
                     break;
             }
         }
-        if (nameCol == 0 || weightCol == 0 || splitCol == 0) return false;
 
-        //TODO:BUG IN getRowValues
-//        String[][] simplifiedSheet = {  sheetHelper.getRowValues(nameCol),
-//                                        sheetHelper.getRowValues(splitCol),
-//                                        sheetHelper.getRowValues(weightCol)};
-//
-//        int lastRow = 0;
-//        for(;lastRow < simplifiedSheet[0].length;lastRow++){
-//            if(simplifiedSheet[0][lastRow].isEmpty())
-//                break;
-//        }
-//        System.out.println("Last Row @ " + lastRow);
-//
-//        for(int i = 0; i < lastRow; i++) {
-//            name = simplifiedSheet[0][i];
-//            split = simplifiedSheet[1][i];
-//            weight = Double.valueOf(simplifiedSheet[2][i]);
-//            if(!addNewRower(name, split, weight)) {
-//                System.out.println("NOT ADDED " + name);
-//                return false;
-//            }
-//            else System.out.println("ADDED " + name);
-//
-//        }
+//        Return false if any of the required col headers were not found
+        if (nameCol == 0 || weightCol == 0 || splitCol == 0) return false;
 
         String[][] rows = new String[sheetHelper.getSheet().getPhysicalNumberOfRows()][colHeaders.length];
 
@@ -151,6 +129,8 @@ public class Controller {
                     System.out.println("ADDED: " + name);
             }
         }
+//        Update the ObservableList
+        getRowers();
         return true;
     }
 
@@ -220,13 +200,18 @@ public class Controller {
                 if (notFound) {
                     Rower[] addRowers = new Rower[8];
                     int count = 0;
-                    for (String value : values) {
+                    for (Object value : values.stream().skip(1).toArray()) {
+                        String casted = (String)value;
                         for (Rower rower : theOne.rowers) {
-                            if (value == Integer.toString(rower.getID()))
+                            System.out.println("Value ID: " + casted + ", Rower ID: " + Integer.toString(rower.getID()));
+                            if (casted.equals(Integer.toString(rower.getID()))) {
+                                System.out.println("MATCH, count: " + count);
                                 addRowers[count++] = rower;
+                            }
                         }
                     }
-                    theOne.lineups.add(new Lineup(ID, addRowers[0], addRowers[1], addRowers[2], addRowers[3]
+                    if(addRowers[0] != null)
+                        theOne.lineups.add(new Lineup(ID, addRowers[0], addRowers[1], addRowers[2], addRowers[3]
                             , addRowers[4], addRowers[5], addRowers[6], addRowers[7]));
 
                 }
