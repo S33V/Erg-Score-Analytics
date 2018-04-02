@@ -35,6 +35,8 @@ public class Controller {
     private ObservableList<Rower> rowers;
     private ObservableList<Lineup> lineups;
 
+    private Lineup activeLineup;
+
     private static Controller theOne;
 
     private Controller() {
@@ -226,5 +228,13 @@ public class Controller {
         }
 
         return theOne.lineups;
+    }
+
+    public Lineup getActiveLineup() {
+        return activeLineup;
+    }
+
+    public void setActiveLineup(Lineup activeLineup) {
+        this.activeLineup = activeLineup;
     }
 }
