@@ -12,6 +12,7 @@ public class Lineup {
     private Split avgAdjSplit;
 
     public Lineup(int id, Rower stroke, Rower seven, Rower six, Rower five, Rower four, Rower three, Rower two, Rower bow) {
+        ID = id;
         rowers = new Rower[]{stroke, seven, six, five, four, three, two, bow};
         splits = new Split[8];
         double seconds = 0;
@@ -23,6 +24,21 @@ public class Lineup {
     }
 
     public int getID() {
+        return ID;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Lineup lineup = (Lineup) o;
+
+        return ID == lineup.ID;
+    }
+
+    @Override
+    public int hashCode() {
         return ID;
     }
 
