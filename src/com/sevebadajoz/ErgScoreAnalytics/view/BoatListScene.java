@@ -52,11 +52,15 @@ public class BoatListScene implements Initializable {
 
 		boatList.setOnMouseClicked(mouseEvent ->{
 			Lineup selectedLineup = boatList.getSelectionModel().getSelectedItem();
-//			If double clicked on a lineup launch the erg stats for selected lineup
-			if(mouseEvent.getClickCount() > 1 && selectedLineup != null)
-				ViewSwitch.loadScene("Erg Stats", ViewSwitch.ERG_STATS_SCENE);
-//			Else enable the edit button
-			else if(editButton.isDisabled()) editButton.setDisable(false);
+//			If the clicked lineup is not null set the active lineup to the selected lineup
+            if (selectedLineup != null) {
+                Controller.getInstance().setActiveLineup(selectedLineup);
+//                If multi-click launch the selected lineup's erg stats
+			    if (mouseEvent.getClickCount() > 1)
+                    ViewSwitch.loadScene("Erg Stats", ViewSwitch.ERG_STATS_SCENE);
+//			      else enable the edit button if it is disabled
+                else if(editButton.isDisabled()) editButton.setDisable(false);
+            }
 		});
 	}
 
