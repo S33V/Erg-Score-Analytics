@@ -1,5 +1,7 @@
 package com.sevebadajoz.ErgScoreAnalytics.model;
 
+import java.util.Arrays;
+
 public class Lineup {
     private int ID;
 
@@ -22,5 +24,11 @@ public class Lineup {
 
     public int getID() {
         return ID;
+    }
+
+    @Override
+    public String toString() {
+        String toString = Arrays.toString(rowers);
+        return toString.substring(1, toString.length() - 1);
     }
 }
