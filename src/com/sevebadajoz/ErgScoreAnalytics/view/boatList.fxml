@@ -10,8 +10,8 @@
   <bottom>
     <HBox alignment="CENTER" fillHeight="fals e" prefHeight="28.0" prefWidth="600.0" spacing="300.0" visible="true">
       <children>
-            <Button fx:id="deleteButton" alignment="CENTER" mnemonicParsing="false"  text="Delete Lineup" />
-            <Button fx:id="editButton" mnemonicParsing="false"  text="Edit Lineup">
+            <Button fx:id="deleteButton" alignment="CENTER" mnemonicParsing="false" text="Delete Lineup" />
+            <Button fx:id="editButton" disable="true" mnemonicParsing="false" text="Edit Lineup">
                <HBox.margin>
                   <Insets left="3.0" right="3.0" />
                </HBox.margin></Button>
@@ -27,7 +27,7 @@
     </HBox>
   </bottom>
   <center>
-    <ListView fx:id="boatList" onMouseClicked="#enableButton" prefHeight="378.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+    <ListView fx:id="boatList" prefHeight="378.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
   </center>
   <top>
     <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitCheck" text="X" BorderPane.alignment="TOP_RIGHT" />

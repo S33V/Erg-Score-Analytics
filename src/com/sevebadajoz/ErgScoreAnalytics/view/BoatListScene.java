@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 
+import javax.swing.text.View;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -48,13 +49,18 @@ public class BoatListScene implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		boatList.setItems(mController.getLineups());
+
+		boatList.setOnMouseClicked(mouseEvent ->{
+			Lineup selectedLineup = boatList.getSelectionModel().getSelectedItem();
+//			If double clicked on a lineup launch the erg stats for selected lineup
+			if(mouseEvent.getClickCount() > 1 && selectedLineup != null)
+				ViewSwitch.loadScene("Erg Stats", ViewSwitch.ERG_STATS_SCENE);
+//			Else enable the edit button
+			else if(editButton.isDisabled()) editButton.setDisable(false);
+		});
 	}
 
-	@FXML
-	Object enableButton() {
-		editButton.setDisable(false);
-		return this;
-	}
+
 
     @FXML
     public Object loadInfo() {
