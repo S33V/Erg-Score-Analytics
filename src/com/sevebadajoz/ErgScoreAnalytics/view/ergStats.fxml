@@ -9,10 +9,10 @@
 
 <BorderPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevebadajoz.ErgScoreAnalytics.view.ErgStatsScene">
    <top>
-      <Button alignment="TOP_LEFT" mnemonicParsing="false" text="&lt;-" BorderPane.alignment="TOP_LEFT" />
+      <Button fx:id="back" alignment="TOP_LEFT" mnemonicParsing="false" text="&lt;-" BorderPane.alignment="TOP_LEFT" />
    </top>
    <bottom>
-      <Button mnemonicParsing="false" text="Weight Adjusted" BorderPane.alignment="CENTER">
+      <Button fx:id="change" mnemonicParsing="false" text="Weight Adjusted" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
          </BorderPane.margin></Button>
@@ -20,21 +20,20 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="8.0" BorderPane.alignment="CENTER">
          <children>
-             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Raw Ranking" textAlignment="CENTER" />
-             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 1   -   00:00" textAlignment="CENTER" />
-             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 2   -   00:00" textAlignment="CENTER" />
-             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 3   -   00:00" textAlignment="CENTER" />
-             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 4   -   00:00" textAlignment="CENTER" />
-             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 5   -   00:00" textAlignment="CENTER" />
-             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 6   -   00:00" textAlignment="CENTER" />
-             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 7   -   00:00" textAlignment="CENTER" />
-             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 8   -   00:00" textAlignment="CENTER" />
-             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 9   -   00:00" textAlignment="CENTER" />
+             <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Raw Ranking" textAlignment="CENTER" />
+             <Text fx:id="rank1" strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 1   -   00:00" textAlignment="CENTER" />
+             <Text fx:id="rank2" strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 2   -   00:00" textAlignment="CENTER" />
+             <Text fx:id="rank3" strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 3   -   00:00" textAlignment="CENTER" />
+             <Text fx:id="rank4" strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 4   -   00:00" textAlignment="CENTER" />
+             <Text fx:id="rank5" strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 5   -   00:00" textAlignment="CENTER" />
+             <Text fx:id="rank6" strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 6   -   00:00" textAlignment="CENTER" />
+             <Text fx:id="rank7" strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 7   -   00:00" textAlignment="CENTER" />
+             <Text fx:id="rank8" strokeType="OUTSIDE" strokeWidth="0.0" text="Rank 8   -   00:00" textAlignment="CENTER" />
 
              <HBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="8.0" BorderPane.alignment="CENTER">
                  <children>
                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Average Split:" />
-                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="00:00" />
+                     <Text fx:id="average" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00" />
                  </children>
                <VBox.margin>
                   <Insets />
@@ -43,7 +42,7 @@
              <HBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="8.0" BorderPane.alignment="CENTER">
                  <children>
                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Boat Split Range:" />
-                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="00:00" />
+                     <Text fx:id="range" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00" />
                  </children>
 
              </HBox>
