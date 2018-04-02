@@ -203,9 +203,9 @@ public class Controller {
                     for (Object value : values.stream().skip(1).toArray()) {
                         String casted = (String)value;
                         for (Rower rower : theOne.rowers) {
-                            System.out.println("Value ID: " + casted + ", Rower ID: " + Integer.toString(rower.getID()));
+//                            System.out.println("Value ID: " + casted + ", Rower ID: " + Integer.toString(rower.getID()));
                             if (casted.equals(Integer.toString(rower.getID()))) {
-                                System.out.println("MATCH, count: " + count);
+//                                System.out.println("MATCH, count: " + count);
                                 addRowers[count++] = rower;
                             }
                         }
