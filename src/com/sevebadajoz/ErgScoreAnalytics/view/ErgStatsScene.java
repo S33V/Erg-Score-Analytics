@@ -18,10 +18,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ErgStatsScene implements Initializable{
-    Controller controller = Controller.getInstance();
-    Lineup lineup = controller.getActiveLineup();
-    Text[] ranks;
-
     @FXML
     Text title;
 
@@ -52,24 +48,53 @@ public class ErgStatsScene implements Initializable{
     @FXML
     Button change;
 
+
+    Controller controller = Controller.getInstance();
+    Lineup lineup = controller.getActiveLineup();
+    Text[] ranks;
+    boolean raw;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
        ranks = new Text[]{rank1, rank2, rank3, rank4, rank5, rank6, rank7, rank8};
-        rawStats();
-
+        raw = false;
+        generateStats();
         back.setOnAction(actionEvent -> {
             ViewSwitch.loadScene("Select Lineup", ViewSwitch.BOAT_LIST_SCENE);
         });
+
+        change.setOnAction(actionEvent ->{
+            generateStats();
+        });
     }
 
-    private void rawStats() {
-        Rower[] rowers = Stream.of(lineup.getRowers()).sorted(Comparator.comparing(rower -> rower.getSplit().toString())).toArray(Rower[]::new);
+    private void generateStats() {
+        Rower[] rowers;
+        Split rangeSplit;
+        if(!raw) {
+            rowers = Stream.of(lineup.getRowers()).sorted(Comparator.comparing(rower -> rower.getSplit().toString())).toArray(Rower[]::new);
+            rangeSplit = new Split(Split.secondsToString(rowers[7].getSplit().textToSeconds() - rowers[0].getSplit().textToSeconds()));
+            title.setText("Raw Ranking");
+            change.setText("Weight Adjusted");
+        }
+        else {
+            rowers = Stream.of(lineup.getRowers()).sorted(Comparator.comparing(rower -> rower.getWeightAdjSplit().toString())).toArray(Rower[]::new);
+            rangeSplit = new Split(Split.secondsToString(rowers[7].getWeightAdjSplit().textToSeconds() - rowers[0].getWeightAdjSplit().textToSeconds()));
+            title.setText("Weight Adjusted Ranking");
+            change.setText("Raw");
+        }
+
         for (int i = 0; i < rowers.length; i++) {
             Rower rower = rowers[i];
-            ranks[i].setText(rower.getName() + "   -   " + rower.getSplit());
+            if(!raw)
+                ranks[i].setText(rower.getName() + "   -   " + rower.getSplit());
+            else
+                ranks[i].setText(rower.getName() + "   -   " + rower.getWeightAdjSplit());
         }
+
         average.setText(lineup.getAvgSplit().toString());
-        Split rangeSplit = new Split(Split.secondsToString(rowers[7].getSplit().textToSeconds() - rowers[0].getSplit().textToSeconds()));
         range.setText(rangeSplit.toString());
+
+        raw = !raw;
     }
 }
