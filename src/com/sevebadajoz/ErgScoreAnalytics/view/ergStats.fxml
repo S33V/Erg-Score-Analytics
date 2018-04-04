@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevebadajoz.ErgScoreAnalytics.view.ErgStatsScene">
+<BorderPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevebadajoz.ErgScoreAnalytics.view.ErgStatsScene">
    <top>
       <Button fx:id="back" alignment="TOP_LEFT" mnemonicParsing="false" text="&lt;-" BorderPane.alignment="TOP_LEFT" />
    </top>
