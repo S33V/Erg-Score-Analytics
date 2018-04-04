@@ -27,6 +27,22 @@ public class Lineup {
         return ID;
     }
 
+    public Rower[] getRowers() {
+        return rowers;
+    }
+
+    public Split[] getSplits() {
+        return splits;
+    }
+
+    public Split getAvgSplit() {
+        return avgSplit;
+    }
+
+    public Split getAvgAdjSplit() {
+        return avgAdjSplit;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
