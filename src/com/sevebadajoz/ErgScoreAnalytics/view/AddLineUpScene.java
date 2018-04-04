@@ -59,13 +59,13 @@ public class AddLineUpScene implements Initializable {
         Rower[] rowers = {stroke, seven, six, five, four, three, two, bow};
         mController.addNewLineup(rowers);
 
-        ViewSwitch.loadScene("Stroke Timing", ViewSwitch.BOAT_LIST_SCENE);
+        ViewSwitch.loadScene("Select Lineup", ViewSwitch.BOAT_LIST_SCENE);
         return this;
     }
 
     @FXML
     Object exit() {
-        ViewSwitch.loadScene("Stroke Timing", ViewSwitch.BOAT_LIST_SCENE);
+        ViewSwitch.loadScene("Select Lineup", ViewSwitch.BOAT_LIST_SCENE);
         return this;
     }
 
