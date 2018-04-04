@@ -13,7 +13,7 @@ public class Split {
     }
 
     public double textToSeconds(String textForm) {
-        double min = Double.parseDouble(textForm.substring(0, 1));
+        double min = Double.parseDouble(textForm.substring(0, 2));
         double sec = Double.parseDouble(textForm.substring(3));
         return 60 * min + sec;
     }
@@ -29,7 +29,7 @@ public class Split {
     public static String secondsToString(double seconds) {
         int min = (int)seconds / 60;
         double sec = seconds % 60;
-        return String.format("%02d", min) + ":" + String.format("%.1f", sec);
+        return String.format("%02d", min) + ":" + String.format("%2.1f", sec);
 
     }
 
@@ -47,6 +47,6 @@ public class Split {
     }
 
     public Split weightAdj(double weight) {
-        return new Split(secondsToString(Math.pow(weight / 270, .222) * seconds));
+        return new Split(secondsToString(Math.pow(weight / 270.0, .222) * seconds));
     }
 }
