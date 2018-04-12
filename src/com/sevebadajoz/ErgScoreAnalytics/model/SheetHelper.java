@@ -2,8 +2,12 @@ package com.sevebadajoz.ErgScoreAnalytics.model;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.*;
@@ -22,7 +26,7 @@ public class SheetHelper {
         this.file = file;
         workbook = new XSSFWorkbook(file);
         //TODO: Ask user what sheet
-        sheet = workbook.getSheetAt(2);
+        sheet = workbook.getSheetAt(3);
     }
 
     public SheetHelper(FileInputStream file, int sheetNum) throws IOException {
@@ -55,12 +59,14 @@ public class SheetHelper {
     public String[] getColValues(int rowNum) {
         Row row = sheet.getRow(rowNum);
         DataFormatter df = new DataFormatter();
+        if(row == null) return new String[]{null};
         String[] ret = new String[row.getPhysicalNumberOfCells()];
         for (int i = 0; i < row.getPhysicalNumberOfCells(); i++) {
             Cell cell = row.getCell(i);
             FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
             ret[i] = df.formatCellValue(cell, evaluator);
         }
+        System.out.println(Arrays.toString(ret));
         return ret;
     }
 

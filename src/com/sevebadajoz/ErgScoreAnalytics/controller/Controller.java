@@ -107,7 +107,7 @@ public class Controller {
 //        Return false if any of the required col headers were not found
         if (nameCol == 0 || weightCol == 0 || splitCol == 0) return false;
 
-        String[][] rows = new String[sheetHelper.getSheet().getPhysicalNumberOfRows()][colHeaders.length];
+        String[][] rows = new String[sheetHelper.getSheet().getLastRowNum()][colHeaders.length];
 
         for (int i = 0; i < rows.length; i++)
             rows[i] = sheetHelper.getColValues(i);
@@ -115,7 +115,7 @@ public class Controller {
         for (int i = 0; i < rows.length; i++) {
 //            Check to see if the first cell in the row is a number
 //            This should be true if the row is a rower, because first cell should be rank
-            if (rows[i][0] == null) rows[i][0] = "";
+            if (rows[i] == null || rows[i][0] == null) rows[i] = new String[]{""};
             Scanner digitChecker = new Scanner(rows[i][0].trim());
             if (!digitChecker.hasNextInt())
                 continue;
@@ -128,7 +128,9 @@ public class Controller {
                     System.out.println("NOT ADDED: " + name);
                     return false;
                 } else
-                    System.out.println("ADDED: " + name);
+
+//                    TODO: Splits are being added incorrectly (ie STICKNEY)
+                    System.out.println("ADDED: " + name + ", " + split);
             }
         }
 //        Update the ObservableList
