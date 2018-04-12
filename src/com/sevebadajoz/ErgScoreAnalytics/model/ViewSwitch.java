@@ -2,9 +2,13 @@ package com.sevebadajoz.ErgScoreAnalytics.model;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 public class ViewSwitch {
     public static final String BOAT_LIST_SCENE = "com/sevebadajoz/ErgScoreAnalytics/view/boatList.fxml";
@@ -29,6 +33,14 @@ public class ViewSwitch {
             e.printStackTrace();
         }
 
+    }
+
+    public static boolean prompt(String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message);
+        alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+       if(alert.showAndWait().get() == ButtonType.YES)
+           return true;
+       return false;
     }
 
     public static void newWindow(String title, String sceneFXML) {
