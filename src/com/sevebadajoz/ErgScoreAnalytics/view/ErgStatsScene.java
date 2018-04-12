@@ -74,12 +74,14 @@ public class ErgStatsScene implements Initializable{
         if(!raw) {
             rowers = Stream.of(lineup.getRowers()).sorted(Comparator.comparing(rower -> rower.getSplit().toString())).toArray(Rower[]::new);
             rangeSplit = new Split(Split.secondsToString(rowers[7].getSplit().textToSeconds() - rowers[0].getSplit().textToSeconds()));
+            average.setText(lineup.getAvgSplit().toString());
             title.setText("Raw Ranking");
             change.setText("Weight Adjusted");
         }
         else {
             rowers = Stream.of(lineup.getRowers()).sorted(Comparator.comparing(rower -> rower.getWeightAdjSplit().toString())).toArray(Rower[]::new);
             rangeSplit = new Split(Split.secondsToString(rowers[7].getWeightAdjSplit().textToSeconds() - rowers[0].getWeightAdjSplit().textToSeconds()));
+            average.setText(lineup.getAvgAdjSplit().toString());
             title.setText("Weight Adjusted Ranking");
             change.setText("Raw");
         }
@@ -92,7 +94,7 @@ public class ErgStatsScene implements Initializable{
                 ranks[i].setText(rower.getName() + "   -   " + rower.getWeightAdjSplit());
         }
 
-        average.setText(lineup.getAvgSplit().toString());
+
         range.setText(rangeSplit.toString());
 
         raw = !raw;

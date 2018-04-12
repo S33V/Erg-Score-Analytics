@@ -15,12 +15,14 @@ public class Lineup {
         ID = id;
         rowers = new Rower[]{stroke, seven, six, five, four, three, two, bow};
         splits = new Split[8];
-        double seconds = 0;
+        double seconds = 0, adjSeconds = 0;
         for (int i = 0; i < rowers.length; i++) {
             splits[i] = rowers[i].getSplit();
             seconds += splits[i].textToSeconds();
+            adjSeconds += rowers[i].getWeightAdjSplit().textToSeconds();
         }
-        avgSplit = new Split(Split.secondsToString(seconds));
+        avgSplit = new Split(Split.secondsToString(seconds / 8));
+        avgAdjSplit = new Split(Split.secondsToString(adjSeconds / 8));
     }
 
     public int getID() {
