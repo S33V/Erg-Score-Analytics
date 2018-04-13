@@ -1,10 +1,12 @@
 package com.sevebadajoz.ErgScoreAnalytics.model;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -19,14 +21,30 @@ public class ViewSwitch {
     public static Stage activeStage;
     public static Stage window;
 
+    static double xOffset = 0.0;
+    static double yOffset = 0.0;
+
     public static void setStage(Stage stage) {
         activeStage = stage;
     }
 
     public static void loadScene(String title, String sceneFXML) {
+
         try {
             activeStage.setTitle(title);
             Scene scene = new Scene(FXMLLoader.load(ViewSwitch.class.getClassLoader().getResource(sceneFXML)));
+            Parent root = scene.getRoot();
+
+
+            root.setOnMousePressed(event -> {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            });
+
+            root.setOnMouseDragged(event -> {
+                activeStage.setX(event.getScreenX() - xOffset);
+                activeStage.setY(event.getScreenY() - yOffset);
+            });
             activeStage.setScene(scene);
             activeStage.show();
         } catch (IOException e) {
