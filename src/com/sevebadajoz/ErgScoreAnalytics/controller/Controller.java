@@ -88,7 +88,7 @@ public class Controller {
         double weight;
         String[] colHeaders = sheetHelper.getColHeaders();
         for (int i = 0; i < colHeaders.length; i++) {
-            String colHeader = colHeaders[i].trim().toUpperCase()
+            String colHeader = colHeaders[i].trim().toUpperCase();
             switch (colHeader) {
                 case ("NAME"):
                     nameCol = i;
@@ -103,6 +103,7 @@ public class Controller {
                     if(colHeader.contains("BEST")
                             && !colHeader.contains("WA")
                             && ViewSwitch.prompt("Would you like to use this year's best scores?")) {
+                        System.out.println("USING BEST SCORES:");
                         bestSplitCol = i;
                     }
             }
@@ -129,8 +130,10 @@ public class Controller {
                 name = rows[i][nameCol];
                 if(bestSplitCol != 0) {
                     String str = rows[i][bestSplitCol];
-                    double min = Double.valueOf(str.substring(0, )) / 4;
-                    double seconds = Double.valueOf(str.substring(str.indexOf(":") + 1))/ 4;
+                    double seconds = Double.parseDouble(str.substring(0, str.indexOf(":"))) * 60
+                            + Double.parseDouble(str.substring(str.indexOf(":") + 1));
+                    seconds /= 4;
+                    split = Split.secondsToString(seconds);
                 }
                 else
                     split = rows[i][splitCol];
