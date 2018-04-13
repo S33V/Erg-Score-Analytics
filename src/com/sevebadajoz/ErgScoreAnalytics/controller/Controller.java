@@ -1,9 +1,6 @@
 package com.sevebadajoz.ErgScoreAnalytics.controller;
 
-import com.sevebadajoz.ErgScoreAnalytics.model.DBModel;
-import com.sevebadajoz.ErgScoreAnalytics.model.Lineup;
-import com.sevebadajoz.ErgScoreAnalytics.model.Rower;
-import com.sevebadajoz.ErgScoreAnalytics.model.SheetHelper;
+import com.sevebadajoz.ErgScoreAnalytics.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.poi.util.SystemOutLogger;
@@ -86,12 +83,13 @@ public class Controller {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        int nameCol = 0, weightCol = 0, splitCol = 0;
+        int nameCol = 0, weightCol = 0, splitCol = 0, bestSplitCol = 0;
         String name, split;
         double weight;
         String[] colHeaders = sheetHelper.getColHeaders();
         for (int i = 0; i < colHeaders.length; i++) {
-            switch (colHeaders[i].trim().toUpperCase()) {
+            String colHeader = colHeaders[i].trim().toUpperCase()
+            switch (colHeader) {
                 case ("NAME"):
                     nameCol = i;
                     break;
@@ -101,7 +99,14 @@ public class Controller {
                 case ("AVG. SPLIT"):
                     splitCol = i;
                     break;
+                default:
+                    if(colHeader.contains("BEST")
+                            && !colHeader.contains("WA")
+                            && ViewSwitch.prompt("Would you like to use this year's best scores?")) {
+                        bestSplitCol = i;
+                    }
             }
+
         }
 
 //        Return false if any of the required col headers were not found
@@ -122,7 +127,13 @@ public class Controller {
             digitChecker.nextInt();
             if (!digitChecker.hasNext()) {
                 name = rows[i][nameCol];
-                split = rows[i][splitCol];
+                if(bestSplitCol != 0) {
+                    String str = rows[i][bestSplitCol];
+                    double min = Double.valueOf(str.substring(0, )) / 4;
+                    double seconds = Double.valueOf(str.substring(str.indexOf(":") + 1))/ 4;
+                }
+                else
+                    split = rows[i][splitCol];
                 weight = Double.valueOf(rows[i][weightCol]);
                 if (!addNewRower(name, split, weight)) {
                     System.out.println("NOT ADDED: " + name);
