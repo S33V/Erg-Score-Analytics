@@ -5,7 +5,6 @@ import com.sevebadajoz.ErgScoreAnalytics.model.Lineup;
 import com.sevebadajoz.ErgScoreAnalytics.model.ViewSwitch;
 import com.sevebadajoz.ErgScoreAnalytics.controller.Controller;
 import com.sevebadajoz.ErgScoreAnalytics.model.Lineup;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -37,7 +36,7 @@ public class BoatListScene implements Initializable {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?");
 		alert.showAndWait()
 				.filter(response -> response == ButtonType.OK)
-				.ifPresent(response -> Platform.exit());
+				.ifPresent(response -> System.exit(0));
 		return this;
 	}
 
