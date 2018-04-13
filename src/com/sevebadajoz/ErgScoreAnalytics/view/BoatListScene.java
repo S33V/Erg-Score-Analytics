@@ -30,6 +30,7 @@ public class BoatListScene implements Initializable {
 	@FXML
 	private Button addButton;
 
+//	TODO: Implement edit and delete lineup buttons
 
 	@FXML
 	public Object exitCheck() {

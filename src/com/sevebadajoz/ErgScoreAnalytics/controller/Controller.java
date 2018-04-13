@@ -143,7 +143,6 @@ public class Controller {
                     return false;
                 } else
 
-//                    TODO: Splits are being added incorrectly (ie STICKNEY)
                     System.out.println("ADDED: " + name + ", " + split);
             }
         }
