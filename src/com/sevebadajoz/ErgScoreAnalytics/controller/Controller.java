@@ -184,6 +184,36 @@ public class Controller {
         return false;
     }
 
+    public boolean editLineup(Lineup lineup) {
+        String key = String.valueOf(lineup.getID());
+        Rower[] rowers = lineup.getRowers();
+        String[] values = new String[rowers.length + 1];
+        values[0] = Integer.toString(lineup.getID());
+        for (int i = 1; i < rowers.length + 1; i++) {
+            values[i] = String.valueOf(rowers[i - 1].getID());
+        }
+
+        try {
+            lineupsTable.updateRecord(key, LINEUPS_FIELD_NAMES, values);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        getLineups();
+        return true;
+    }
+
+    public boolean deleteLineup(Lineup lineup) {
+        try {
+            lineups.remove(lineup);
+            lineupsTable.deleteRecord(String.valueOf(lineup.getID()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
 
 
     public ObservableList<Rower> getRowers() {
@@ -234,10 +264,12 @@ public class Controller {
                     Lineup newLineup = new Lineup(lineupID, addRowers[0], addRowers[1],
                             addRowers[2], addRowers[3], addRowers[4], addRowers[5], addRowers[6], addRowers[7]);
 //                    If the new Lineup doesn't already exist in the ObservableList, add it
-                    if (!theOne.lineups.contains(newLineup))
+                    if (!theOne.lineups.contains(newLineup)) {
                         theOne.lineups.add(newLineup);
+                        System.out.println("ADDED: " + newLineup);
+                    }
                     else {
-                        System.out.println(newLineup + " already exists");
+                        System.out.println("ALREADY EXISTS: " + newLineup );
                     }
                 }
 
