@@ -32,7 +32,8 @@ public class Controller {
     private ObservableList<Rower> rowers;
     private ObservableList<Lineup> lineups;
 
-    private Lineup activeLineup;
+    private static Lineup activeLineup;
+    private static boolean editMode;
 
     private static Controller theOne;
 
@@ -42,6 +43,8 @@ public class Controller {
     public static Controller getInstance() {
         if (theOne == null) {
             theOne = new Controller();
+
+            editMode = false;
 
             theOne.rowers = FXCollections.observableArrayList();
             theOne.lineups = FXCollections.observableArrayList();
@@ -251,5 +254,13 @@ public class Controller {
 
     public void setActiveLineup(Lineup activeLineup) {
         this.activeLineup = activeLineup;
+    }
+
+    public static boolean isEditMode() {
+        return editMode;
+    }
+
+    public static void setEditMode(boolean editMode) {
+        Controller.editMode = editMode;
     }
 }
