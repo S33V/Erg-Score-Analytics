@@ -5,6 +5,7 @@ import com.sevebadajoz.ErgScoreAnalytics.model.Lineup;
 import com.sevebadajoz.ErgScoreAnalytics.model.ViewSwitch;
 import com.sevebadajoz.ErgScoreAnalytics.controller.Controller;
 import com.sevebadajoz.ErgScoreAnalytics.model.Lineup;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -37,12 +38,13 @@ public class BoatListScene implements Initializable {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?");
 		alert.showAndWait()
 				.filter(response -> response == ButtonType.OK)
-				.ifPresent(response -> System.exit(0));
+				.ifPresent(buttonType -> Platform.exit());
 		return this;
 	}
 
 	@FXML
 	public Object loadAddBoat() {
+		mController.setEditMode(false);
 		ViewSwitch.loadScene("Add a Lineup", ViewSwitch.ADD_LINEUP_SCENE);
 		return this;
 	}
@@ -61,17 +63,27 @@ public class BoatListScene implements Initializable {
                     ViewSwitch.loadScene("Erg Stats", ViewSwitch.ERG_STATS_SCENE);
 //			      else enable the edit button if it is disabled
                 else if(editButton.isDisabled()) editButton.setDisable(false);
+
+                if(deleteButton.isDisabled()) deleteButton.setDisable(false);
+
             }
+		});
+
+		editButton.setOnMouseClicked(event -> {
+			mController.setEditMode(true);
+			ViewSwitch.loadScene("Edit Lineup", ViewSwitch.ADD_LINEUP_SCENE);
+		});
+
+		deleteButton.setOnMouseClicked(event -> {
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION
+					, "Are you sure you want to delete lineup: " + mController.getActiveLineup());
+			alert.showAndWait()
+					.filter(response -> response == ButtonType.OK)
+					.ifPresent(buttonType -> mController.deleteLineup(mController.getActiveLineup()));
 		});
 	}
 
 
 
-    @FXML
-    public Object loadInfo() {
-        Lineup lineup = boatList.getSelectionModel().getSelectedItem();
-//		mController.setActiveLineup(lineup);
-//		ViewSwitch.loadScene("Practices for " + lineup, ViewSwitch.PRACTICE_LIST_SCENE);
-        return this;
-    }
+
 }
