@@ -3,6 +3,7 @@ package com.sevebadajoz.ErgScoreAnalytics.view;
 import com.sevebadajoz.ErgScoreAnalytics.controller.Controller;
 import com.sevebadajoz.ErgScoreAnalytics.controller.Controller;
 
+import com.sevebadajoz.ErgScoreAnalytics.model.Lineup;
 import com.sevebadajoz.ErgScoreAnalytics.model.Rower;
 import com.sevebadajoz.ErgScoreAnalytics.model.ViewSwitch;
 import javafx.collections.FXCollections;
@@ -22,12 +23,7 @@ public class AddLineUpScene implements Initializable {
     Button mBack;
     @FXML
     Button mAddLineup;
-    @FXML
-    Button mAddBoat;
-    @FXML
-    Button mAddRower;
-    @FXML
-    Button mAddCoxswain;
+
 
     @FXML
     ComboBox<Rower> mStroke;
@@ -46,6 +42,8 @@ public class AddLineUpScene implements Initializable {
     @FXML
     ComboBox<Rower> mBowSeat;
 
+    Lineup activeLineup;
+
     @FXML
     Object addLineup() {
         Rower stroke = mStroke.getSelectionModel().getSelectedItem();
@@ -57,7 +55,15 @@ public class AddLineUpScene implements Initializable {
         Rower two = mTwoSeat.getSelectionModel().getSelectedItem();
         Rower bow = mBowSeat.getSelectionModel().getSelectedItem();
         Rower[] rowers = {stroke, seven, six, five, four, three, two, bow};
-        mController.addNewLineup(rowers);
+        if(mController.isEditMode()) {
+            activeLineup.setRowers(rowers);
+            if(mController.editLineup(activeLineup))
+                System.out.println("EDIT SUCCESSFUL: " + activeLineup);
+            else
+                System.out.println("EDIT FAILED: " + activeLineup);
+        }
+        else
+            mController.addNewLineup(rowers);
 
         ViewSwitch.loadScene("Select Lineup", ViewSwitch.BOAT_LIST_SCENE);
         return this;
@@ -94,6 +100,19 @@ public class AddLineUpScene implements Initializable {
         mThreeSeat.getItems().setAll(allRowers);
         mTwoSeat.getItems().setAll(allRowers);
         mBowSeat.getItems().setAll(allRowers);
+        if(mController.isEditMode()) {
+            activeLineup = mController.getActiveLineup();
 
+            mAddLineup.setText("EDIT");
+
+            mStroke.setValue(activeLineup.getRowers()[0]);
+            mSevenSeat.setValue(activeLineup.getRowers()[1]);
+            mSixSeat.setValue(activeLineup.getRowers()[2]);
+            mFiveSeat.setValue(activeLineup.getRowers()[3]);
+            mFourSeat.setValue(activeLineup.getRowers()[4]);
+            mThreeSeat.setValue(activeLineup.getRowers()[5]);
+            mTwoSeat.setValue(activeLineup.getRowers()[6]);
+            mBowSeat.setValue(activeLineup.getRowers()[7]);
+        }
     }
 }
