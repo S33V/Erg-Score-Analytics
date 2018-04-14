@@ -33,6 +33,10 @@ public class Lineup {
         return rowers;
     }
 
+    public void setRowers(Rower[] rowers) {
+        this.rowers = rowers;
+    }
+
     public Split[] getSplits() {
         return splits;
     }
@@ -52,12 +56,16 @@ public class Lineup {
 
         Lineup lineup = (Lineup) o;
 
-        return ID == lineup.ID;
+        if (ID != lineup.ID) return false;
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        return Arrays.equals(rowers, lineup.rowers);
     }
 
     @Override
     public int hashCode() {
-        return ID;
+        int result = ID;
+        result = 31 * result + Arrays.hashCode(rowers);
+        return result;
     }
 
     @Override
