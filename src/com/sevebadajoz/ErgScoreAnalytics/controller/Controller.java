@@ -169,6 +169,22 @@ public class Controller {
         }
     }
 
+    public boolean addNewLineup(Rower[] rowers) {
+        String[] IDs = new String[rowers.length];
+        for (int i = 0; i < IDs.length; i++) {
+            IDs[i] = Integer.toString(rowers[i].getID());
+        }
+        try {
+            lineupsTable.createRecord(Arrays.copyOfRange(LINEUPS_FIELD_NAMES, 1, LINEUPS_FIELD_NAMES.length), IDs);
+            System.out.println("ADDED LINEUP: " + rowers);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
 
     public ObservableList<Rower> getRowers() {
         try {
@@ -191,21 +207,6 @@ public class Controller {
             e.printStackTrace();
         }
         return theOne.rowers;
-    }
-
-    public boolean addNewLineup(Rower[] rowers) {
-        String[] IDs = new String[rowers.length];
-        for (int i = 0; i < IDs.length; i++) {
-            IDs[i] = Integer.toString(rowers[i].getID());
-        }
-        try {
-            lineupsTable.createRecord(Arrays.copyOfRange(LINEUPS_FIELD_NAMES, 1, LINEUPS_FIELD_NAMES.length), IDs);
-            System.out.println("ADDED LINEUP: " + rowers);
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     public ObservableList<Lineup> getLineups() {
