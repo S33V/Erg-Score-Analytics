@@ -3,9 +3,7 @@ package com.sevebadajoz.ErgScoreAnalytics.controller;
 import com.sevebadajoz.ErgScoreAnalytics.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.apache.poi.util.SystemOutLogger;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -27,7 +25,7 @@ public class Controller {
     public static final String[] ROWERS_FIELD_NAMES = {"id", "name", "split", "weight"};
     public static final String[] ROWERS_FIELD_TYPES = {"INTEGER PRIMARY KEY", "TEXT", "TEXT", "REAL"};
 
-    public static SheetHelper sheetHelper;
+    public static WorkbookHelper workbookHelper;
 
     private ObservableList<Rower> rowers;
     private ObservableList<Lineup> lineups;
@@ -61,7 +59,7 @@ public class Controller {
 
     public static boolean openSheet(FileInputStream fileName) {
         try {
-            sheetHelper = new SheetHelper(fileName);
+            workbookHelper = new WorkbookHelper(fileName);
             return theOne.addRowersFromSheet();
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,7 +70,7 @@ public class Controller {
 
     public static boolean openSheet(FileInputStream fileName, int sheetNum) {
         try {
-            sheetHelper = new SheetHelper(fileName, sheetNum);
+            workbookHelper = new WorkbookHelper(fileName, sheetNum);
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -89,7 +87,7 @@ public class Controller {
         int nameCol = 0, weightCol = 0, splitCol = 0, bestSplitCol = 0;
         String name, split;
         double weight;
-        String[] colHeaders = sheetHelper.getColHeaders();
+        String[] colHeaders = workbookHelper.getColHeaders();
         for (int i = 0; i < colHeaders.length; i++) {
             String colHeader = colHeaders[i].trim().toUpperCase();
             switch (colHeader) {
@@ -116,10 +114,10 @@ public class Controller {
 //        Return false if any of the required col headers were not found
         if (nameCol == 0 || weightCol == 0 || splitCol == 0) return false;
 
-        String[][] rows = new String[sheetHelper.getSheet().getLastRowNum()][colHeaders.length];
+        String[][] rows = new String[workbookHelper.getSheet().getLastRowNum()][colHeaders.length];
 
         for (int i = 0; i < rows.length; i++)
-            rows[i] = sheetHelper.getColValues(i);
+            rows[i] = workbookHelper.getColValues(i);
 
         for (int i = 0; i < rows.length; i++) {
 //            Check to see if the first cell in the row is a number
@@ -215,8 +213,8 @@ public class Controller {
     }
 
 
-    public static SheetHelper getSheetHelper() {
-        return sheetHelper;
+    public static WorkbookHelper getWorkbookHelper() {
+        return workbookHelper;
     }
 
     public ObservableList<Rower> getRowers() {

@@ -2,19 +2,14 @@ package com.sevebadajoz.ErgScoreAnalytics.model;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.stream.Stream;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class SheetHelper {
+public class WorkbookHelper {
     FileInputStream file;
 
     XSSFWorkbook workbook;
@@ -22,14 +17,14 @@ public class SheetHelper {
 
 
 
-    public SheetHelper(FileInputStream file) throws IOException {
+    public WorkbookHelper(FileInputStream file) throws IOException {
         this.file = file;
         workbook = new XSSFWorkbook(file);
         //TODO: Ask user what sheet
         sheet = workbook.getSheetAt(3);
     }
 
-    public SheetHelper(FileInputStream file, int sheetNum) throws IOException {
+    public WorkbookHelper(FileInputStream file, int sheetNum) throws IOException {
         this(file);
         sheet = workbook.getSheetAt(sheetNum);
     }

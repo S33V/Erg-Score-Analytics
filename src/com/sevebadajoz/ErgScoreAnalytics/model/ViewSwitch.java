@@ -6,16 +6,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.Optional;
-import java.util.function.Consumer;
 
 public class ViewSwitch {
     public static final String BOAT_LIST_SCENE = "com/sevebadajoz/ErgScoreAnalytics/view/boatList.fxml";
     public static final String ADD_LINEUP_SCENE = "com/sevebadajoz/ErgScoreAnalytics/view/addLineup.fxml";
-    public static final String IMPORT_SHEET_SCENE    = "com/sevebadajoz/ErgScoreAnalytics/view/importSheet.fxml";
+    public static final String IMPORT_WORKBOOK_SCENE = "com/sevebadajoz/ErgScoreAnalytics/view/importWorkbook.fxml";
     public static final String ERG_STATS_SCENE = "com/sevebadajoz/ErgScoreAnalytics/view/ergStats.fxml";
 
     public static Stage activeStage;

@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevebadajoz.ErgScoreAnalytics.view.ImportSheetScene">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sevebadajoz.ErgScoreAnalytics.view.ImportWorkbookScene">
    <center>
       <VBox alignment="CENTER" prefHeight="300.0" prefWidth="400.0">
          <children>

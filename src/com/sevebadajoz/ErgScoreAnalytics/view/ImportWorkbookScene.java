@@ -2,8 +2,6 @@ package com.sevebadajoz.ErgScoreAnalytics.view;
 
 import com.sevebadajoz.ErgScoreAnalytics.controller.Controller;
 import com.sevebadajoz.ErgScoreAnalytics.model.ViewSwitch;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -16,11 +14,10 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ImportSheetScene implements Initializable{
+public class ImportWorkbookScene implements Initializable{
 
     @FXML
     private Button browseButton;
@@ -56,8 +53,12 @@ public class ImportSheetScene implements Initializable{
 
         submitButton.setOnAction(event -> {
             try {
-                if(controller.openSheet(new FileInputStream(filePath.getText())))
-                ViewSwitch.loadScene("Select Lineup", ViewSwitch.BOAT_LIST_SCENE);
+                if(controller.openSheet(new FileInputStream(filePath.getText()))) {
+                    if(controller.getWorkbookHelper().getSheetNames().length > 1) {
+
+                    }
+                    ViewSwitch.loadScene("Select Lineup", ViewSwitch.BOAT_LIST_SCENE);
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
