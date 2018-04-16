@@ -215,6 +215,9 @@ public class Controller {
     }
 
 
+    public static SheetHelper getSheetHelper() {
+        return sheetHelper;
+    }
 
     public ObservableList<Rower> getRowers() {
         try {
