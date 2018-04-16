@@ -70,6 +70,14 @@ public class SheetHelper {
         return ret;
     }
 
+    public String[] getSheetNames() {
+        String[] ret = new String[workbook.getNumberOfSheets()];
+        for (int i = 0; i < ret.length; i++) {
+            ret[i] = workbook.getSheetName(i);
+        }
+        return ret;
+    }
+
     public XSSFSheet getSheet() {
         return sheet;
     }
